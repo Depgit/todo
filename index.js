@@ -19,10 +19,10 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use('/api/auth', require('./routes/auth'));
 
 if (process.env.NODE_ENV == "production") {
-    app.use(express.static('client/build'))
+    app.use(express.static('todo/build'))
     const path = require('path')
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.sendFile(path.resolve(__dirname, 'todo', 'build', 'index.html'))
     })
 }
 
