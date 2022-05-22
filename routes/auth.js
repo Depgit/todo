@@ -36,6 +36,7 @@ router.post('/signup', async (req, res) => {
  */
 router.post('/login', async (req, res) => {
     const user = await User.findOne({$or: [{email: req.body.email}]});
+console.log("user>> ",user);
     try{
         if(!user){
             return res.status(400).json({error:'User not found'});
@@ -50,5 +51,27 @@ router.post('/login', async (req, res) => {
     }
 });
 
+/**
+ * @router DELETE api/auth/deletealluser
+ */
+router.delete('/deletealluser', async (req, res) => {
+    try {
+        const user = await User.deleteMany();
+        res.json({user});
+    } catch(err) {
+        res.status(400).json({error: err});
+    }
+});
+
+router.get('/logout', async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.user._id});
+        user.token = '';
+        await user.save();
+        res.json({user});
+    } catch(err) {
+        res.status(400).json({error: err});
+    }
+});
 
 module.exports = router;
