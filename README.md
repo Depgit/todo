@@ -2,7 +2,7 @@
 <a href="https://firetododep.herokuapp.com/">demo of website</a>
 # how to test from postman
 
-<b>/api/auth/signup<b>
+POST request to  -> <b>/api/auth/signup<b>
 
 ```
 {
